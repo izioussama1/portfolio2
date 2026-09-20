@@ -86,8 +86,13 @@ export default function Home() {
               <video
                 autoPlay={true}
                 muted
-                loop
+                loop={true}
                 playsInline
+                onEnded={(event) => {
+                  const video = event.currentTarget;
+                  video.currentTime = 0;
+                  void video.play();
+                }}
                 className="aspect-[9/9] w-full object-cover"
                 aria-label="Frequentla motion design poster animation"
               >
@@ -120,7 +125,7 @@ export default function Home() {
         aria-hidden
       >
         <div className="flex w-max animate-marquee items-center gap-8">
-          {[...marquee, ...marquee].map((word, i) => (
+          {[...marquee, ...marquee, ...marquee].map((word, i) => (
             <span key={i} className="flex items-center gap-8 whitespace-nowrap">
               <span className="font-display text-lg font-medium text-cream/60">
                 {word}
